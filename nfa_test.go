@@ -15,7 +15,7 @@ func TestSingleCharacter(t *testing.T) {
 	}
 
 	// try some unicode characters
-	for c := rune(10000); c < 10000 + 256; c++ {
+	for c := rune(10000); c < 10000+256; c++ {
 		if !characterNFA(c).process(string(c)) {
 			t.Error("Failed to match rune", c)
 		}

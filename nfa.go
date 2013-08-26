@@ -6,7 +6,7 @@ type node struct {
 
 type nfa struct {
 	finals []*node
-	start *node
+	start  *node
 }
 
 // Copy b's transitions to a
@@ -42,7 +42,7 @@ func (a *nfa) or(b *nfa) {
 // Modifies the NFA to optionally skip processing.
 //
 // We achieve this by simply making the start state final.
-func (a* nfa) makeOptional() {
+func (a *nfa) makeOptional() {
 	// check if the start state is already final (in which case there's nothing to do)
 	for _, n := range a.finals {
 		if n == a.start {
@@ -55,7 +55,7 @@ func (a* nfa) makeOptional() {
 }
 
 // Modifies the NFA to loop on itself 0 or more times (ie, the empty string is valid as well)
-func (a* nfa) loop() {
+func (a *nfa) loop() {
 	// this ensures the start state is final
 	a.makeOptional()
 
@@ -92,8 +92,8 @@ func (m *nfa) process(s string) bool {
 	}
 
 	// are any of the active states final? (ugly double for-loop atm)
-	for _, final := range(m.finals) {
-		for _, active := range(activeStates) {
+	for _, final := range m.finals {
+		for _, active := range activeStates {
 			if final == active {
 				return true
 			}
